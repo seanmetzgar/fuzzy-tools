@@ -1,0 +1,259 @@
+/** Variables **/
+$brand-brown: #3D1B02;
+$brand-tan: #8A4D21;
+$brand-blue: #21808A;
+$brand-dark-blue: #09383D;
+$brand-light-blue: #49C9D6;
+$brand-grey: #555;
+$brand-white: #fff;
+
+$menu-bg-color: $brand-grey;
+$navbar-bg-color: $brand-blue;
+$app-bg-color: lighten($brand-blue, 50%);
+
+/** BEGIN: Core **/
+#app-wrapper {
+    background-color: $app-bg-color;
+
+    padding-top: 5rem;
+
+    .navbar {
+        background-color: $navbar-bg-color;
+    }
+
+
+}
+
+a {
+    transition: color 0.2s ease-in;
+    &:hover {
+        transition: color 0.2s ease-out;
+    }
+}
+.btn {
+    border-radius: 0;
+}
+
+/** END: Core **/
+
+/** Data Cards **/
+.data-card {
+    margin-bottom: 1rem !important;
+    .card-header {
+        background-color: lighten($brand-grey, 50%);
+        overflow: hidden;
+        padding-top: 0; padding-bottom: 0;
+        padding-right: 0;
+
+        h3 {
+            margin: 0; padding: 0;
+            line-height: 4rem;
+            float: left;
+        }
+
+        .meta {
+            display: block;
+            padding: 0; margin: 0;
+            float: right;
+            overflow: hidden;
+            
+            .weather {
+                display: block;
+                width: 4rem;
+                padding: 0.5rem; margin: 0;
+                border-left: 1px solid $brand-grey;
+                
+                float: left;
+                overflow: hidden;
+                
+                line-height: 0;
+
+                &:before {
+                    display: block;
+                    margin: 0; padding: 0;
+                    width: 100%; height: auto;
+
+                    font-size: 2rem;
+                    line-height: 1;
+                    text-align: center;   
+                }
+                &:after {
+                    display: block;
+                    text-align: center;
+                    font-style: italic;
+                    color: $brand-brown;
+                    font-size: .75rem;
+                    line-height: .75rem;
+                    font-weight: normal;
+                    margin: .25rem 0 0 0;
+                }
+
+                &.am:after {
+                    content: 'AM';
+                }
+                &.pm:after {
+                    content: 'PM';
+                }
+            }
+        } 
+    }
+
+    .card-body {
+        padding-top: 0; padding-bottom: 0;
+        margin-left: -.25rem;
+        margin-right: -.25rem;
+        .weather-details {
+            h5 {
+                margin: .5rem 0;
+                font-weight: bold;
+            }
+            i:before {
+                font-size: 3rem;
+                margin: .25rem 0;
+            }
+        }
+
+        .dice-details {
+            h5{
+                margin: .5rem 0;
+                font-weight: bold;
+            }
+            .dice {
+               .roll {
+                    font-weight: bold;
+                    font-size: 1.25rem;
+                    margin-bottom: .25rem;
+                    padding: 0;
+                    display: inline-block;
+                    box-sizing: border-box;
+                    line-height: 2rem; width: 3rem;
+                    border: 1px solid $brand-brown;
+               }
+               .description {
+                    margin: 0 0 .25rem
+               }
+            }
+            .displacement {
+                display: block;
+                margin: 0 auto .25rem;
+                width: 3rem; height: 3rem;
+                background-repeat: no-repeat;
+                background-position: 50% 50%;
+                background-size: contain;
+                text-indent: -9999em;
+                &.d1 {
+                    background-image: url(../img/displacement/displacement_1.png);  
+                }
+                &.d2 {
+                    background-image: url(../img/displacement/displacement_2.png);  
+                }
+                &.d3 {
+                    background-image: url(../img/displacement/displacement_3.png);  
+                }
+                &.d4 {
+                    background-image: url(../img/displacement/displacement_4.png);  
+                }
+                &.d5 {
+                    background-image: url(../img/displacement/displacement_5.png);  
+                }
+                &.d6 {
+                    background-image: url(../img/displacement/displacement_6.png);  
+                }
+            }
+        }
+
+        .data {
+            list-style-type: none;
+            margin: .5rem 0;
+            padding-left: 0; padding-right: 0;
+            li {
+                margin-left: 0; margin-right: 0;
+                padding-left: 0; padding-right: 0;
+            }
+        }
+        .description {
+            font-size: .75rem;
+            font-style: italic;
+        }
+
+    }
+}
+
+
+
+/** BEGIN: Navigation Styles **/
+#menu-wrapper {
+    background-color: $menu-bg-color;
+    .nav-item {
+        text-align: left;
+        display: block;
+        width: 100%;
+        font-weight: medium;
+        font-size: 1.2rem;
+
+        .nav-link {
+            display: block;
+            color: $brand-white;
+
+            i {
+                display: inline-block;
+                margin-right: 1em;
+            }
+
+            &:hover {
+                color: $brand-light-blue;
+            }
+
+            &:after {
+                content: '';
+                width: 70%;
+                display: block;
+                margin: 0 auto;
+                height: 1px;
+            }
+        }
+    }
+
+}
+/** END: Navigation Styles **/
+
+
+/** BEGIN: Slideout.js Styles **/
+.slideout-menu {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 256px;
+    min-height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    z-index: 0;
+    display: none;
+}
+
+.slideout-menu-left {
+    left: 0;
+}
+
+.slideout-menu-right {
+    right: 0;
+}
+
+.slideout-panel {
+    position: relative;
+    z-index: 1;
+    will-change: transform;
+    background-color: #FFF; /* A background-color is required */
+    min-height: 100vh;
+}
+
+.slideout-open,
+.slideout-open body,
+.slideout-open .slideout-panel {
+    overflow: hidden;
+}
+
+.slideout-open .slideout-menu {
+    display: block;
+}
+/** END: Slideout.js Styles **/

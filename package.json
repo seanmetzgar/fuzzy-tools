@@ -1,0 +1,45 @@
+{
+  "name": "fuzzy-tools",
+  "version": "0.0.1",
+  "description": "Fuzzy Bunny Adventurers' Guild Tools",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sean Metzgar <sean.metzgar@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-copy": "^1.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-strip-comments": "^2.5.1",
+    "gulp-strip-css-comments": "^1.2.0",
+    "gulp-uglify": "^3.0.0"
+  },
+  "repository": "",
+  "dependencies": {
+    "bootstrap": "^4.0.0-beta.2",
+    "crossroads": "^0.12.2",
+    "dotenv": "^4.0.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-environment": "^1.5.1",
+    "gulp-if": "^2.0.2",
+    "gulp-pipe": "^1.0.4",
+    "gulp-prompt": "^0.4.1",
+    "gulp-rsync": "^0.0.8",
+    "gulp-util": "^3.0.8",
+    "hasher": "^1.2.0",
+    "jquery": "^3.2.1",
+    "mdbootstrap": "^4.4.3",
+    "minimist": "^1.2.0",
+    "popper.js": "1.12.3",
+    "rsyncwrapper": "^2.0.1",
+    "signals": "^1.0.0",
+    "slideout": "^1.0.1"
+  }
+}

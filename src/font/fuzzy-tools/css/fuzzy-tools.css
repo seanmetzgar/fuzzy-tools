@@ -1,0 +1,67 @@
+@font-face {
+  font-family: 'fuzzy-tools';
+  src: url('../font/fuzzy-tools.eot?29751523');
+  src: url('../font/fuzzy-tools.eot?29751523#iefix') format('embedded-opentype'),
+       url('../font/fuzzy-tools.woff2?29751523') format('woff2'),
+       url('../font/fuzzy-tools.woff?29751523') format('woff'),
+       url('../font/fuzzy-tools.ttf?29751523') format('truetype'),
+       url('../font/fuzzy-tools.svg?29751523#fuzzy-tools') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fuzzy-tools';
+    src: url('../font/fuzzy-tools.svg?29751523#fuzzy-tools') format('svg');
+  }
+}
+*/
+ 
+ [class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "fuzzy-tools";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+ 
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+ 
+.icon-cog-alt:before { content: '\e800'; } /* '' */
+.icon-calendar:before { content: '\e801'; } /* '' */
+.icon-users:before { content: '\e802'; } /* '' */
+.icon-emo-devil:before { content: '\e805'; } /* '' */
+.icon-sunny:before { content: '\e809'; } /* '' */
+.icon-overcast:before { content: '\e80a'; } /* '' */
+.icon-storm:before { content: '\e80b'; } /* '' */
+.icon-showers:before { content: '\e80c'; } /* '' */
+.icon-rain:before { content: '\e80d'; } /* '' */
+.icon-heavy-rain:before { content: '\e80e'; } /* '' */
