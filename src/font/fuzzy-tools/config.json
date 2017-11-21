@@ -65,6 +65,18 @@
       "css": "heavy-rain",
       "code": 59406,
       "src": "meteocons"
+    },
+    {
+      "uid": "d531ea7e8c094b73df941ed0bac921f3",
+      "css": "inventory",
+      "code": 62096,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "9396b2d8849e0213a0f11c5fd7fcc522",
+      "css": "quests",
+      "code": 61614,
+      "src": "fontawesome"
     }
   ]
 }

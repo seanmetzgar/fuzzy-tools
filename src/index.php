@@ -20,10 +20,12 @@
     <!-- Start your project here-->
     <div id="menu-wrapper" class="z-depth-0">
         <ul class="nav flex-center flex-column">
-            <li class="nav-item"><a class="nav-link" href="#calendar"><i class="icon-calendar"></i>Calendar</a></li>
-            <li class="nav-item"><a class="nav-link" href="#characters"><i class="icon-users" aria-hidden="true"></i>Characters</a></li>
-            <li class="nav-item"><a class="nav-link" href="#death-curse"><i class="icon-emo-devil" aria-hidden="true"></i>Death Curse</a></li>
-            <li class="nav-item"><a class="nav-link" href="#settings"><i class="icon-cog-alt" aria-hidden="true"></i>Settings</a></li>
+            <li class="nav-item"><a class="nav-link" href="#/calendar"><i class="icon-calendar"></i>Calendar</a></li>
+            <li class="nav-item"><a class="nav-link" href="#/quests"><i class="icon-quests"></i>Quests</a></li>
+            <li class="nav-item"><a class="nav-link" href="#/inventory"><i class="icon-inventory" aria-hidden="true"></i>Inventory</a></li>
+            <li class="nav-item"><a class="nav-link" href="#/characters"><i class="icon-users" aria-hidden="true"></i>Characters</a></li>
+            <li class="nav-item"><a class="nav-link" href="#/death-curse"><i class="icon-emo-devil" aria-hidden="true"></i>Death Curse</a></li>
+            <li class="nav-item"><a class="nav-link" href="#/settings"><i class="icon-cog-alt" aria-hidden="true"></i>Settings</a></li>
         </ul>
     </div>
     
@@ -35,9 +37,48 @@
             </button>
         </nav>
 
-        
-        <!-- Calendar View -->
-        <section class="app-view container" id="calendar">
+        <!-- BEGIN: Quests View -->
+        <section class="app-view container quests" id="quests">
+            <h1 class="text-center">Quests</h1>
+            <div class="row justify-content-center">
+
+            </div>
+        </section>
+
+        <!-- BEGIN: Inventory View -->
+        <section class="app-view container inventory" id="inventory">
+            <h1 class="text-center">Inventory</h1>
+            <div class="row justify-content-center">
+
+            </div>
+        </section>
+
+        <!-- BEGIN: Characters View -->
+        <section class="app-view container characters" id="characters">
+            <h1 class="text-center">Characters</h1>
+            <div class="row justify-content-center">
+
+            </div>
+        </section>
+
+        <!-- BEGIN: Death Curse View -->
+        <section class="app-view container death-curse" id="death-curse">
+            <h1 class="text-center">Death Curse</h1>
+            <div class="row justify-content-center">
+
+            </div>
+        </section>
+
+        <!-- BEGIN: Settings View -->
+        <section class="app-view container settings" id="settings">
+            <h1 class="text-center">Settings</h1>
+            <div class="row justify-content-center">
+
+            </div>
+        </section>
+
+        <!-- BEGIN: Calendar View -->
+        <section class="app-view container calendar" id="calendar">
             <h1 class="text-center">Calendar</h1>
             <?php if (is_object($day_data) && $day_data->id != false): ?>
             <div class="row justify-content-center">

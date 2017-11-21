@@ -20,3 +20,5 @@
 .icon-showers { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe80c;&nbsp;'); }
 .icon-rain { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe80d;&nbsp;'); }
 .icon-heavy-rain { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe80e;&nbsp;'); }
+.icon-quests { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf0ae;&nbsp;'); }
+.icon-inventory { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf290;&nbsp;'); }

@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'fuzzy-tools';
-  src: url('../font/fuzzy-tools.eot?29751523');
-  src: url('../font/fuzzy-tools.eot?29751523#iefix') format('embedded-opentype'),
-       url('../font/fuzzy-tools.woff2?29751523') format('woff2'),
-       url('../font/fuzzy-tools.woff?29751523') format('woff'),
-       url('../font/fuzzy-tools.ttf?29751523') format('truetype'),
-       url('../font/fuzzy-tools.svg?29751523#fuzzy-tools') format('svg');
+  src: url('../font/fuzzy-tools.eot?3382394');
+  src: url('../font/fuzzy-tools.eot?3382394#iefix') format('embedded-opentype'),
+       url('../font/fuzzy-tools.woff2?3382394') format('woff2'),
+       url('../font/fuzzy-tools.woff?3382394') format('woff'),
+       url('../font/fuzzy-tools.ttf?3382394') format('truetype'),
+       url('../font/fuzzy-tools.svg?3382394#fuzzy-tools') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fuzzy-tools';
-    src: url('../font/fuzzy-tools.svg?29751523#fuzzy-tools') format('svg');
+    src: url('../font/fuzzy-tools.svg?3382394#fuzzy-tools') format('svg');
   }
 }
 */
@@ -65,3 +65,5 @@
 .icon-showers:before { content: '\e80c'; } /* '' */
 .icon-rain:before { content: '\e80d'; } /* '' */
 .icon-heavy-rain:before { content: '\e80e'; } /* '' */
+.icon-quests:before { content: '\f0ae'; } /* '' */
+.icon-inventory:before { content: '\f290'; } /* '' */

@@ -63,7 +63,8 @@ var paths = {
             "./src/vendor/mdbootstrap/js/mdb.js"
         ],
         src:[
-            "./src/js/src/scripts.js"
+            "./src/js/src/scripts.js",
+            "./src/js/src/routes.js"
         ]
     },
     sass: {
@@ -96,66 +97,66 @@ var paths = {
 gulp.task("vendor:jquery", function () {
     return pipe(gulp.src("./node_modules/jquery/dist/jquery.js"),
         [gulp.dest("./src/vendor/jquery")])
-        .on('error', function(e) {console.log(e);});
+        .on('error', gutil.log);
 });
 
 gulp.task("vendor:signals", function () {
     return pipe(gulp.src("./node_modules/signals/dist/signals.js"),
         [gulp.dest("./src/vendor/signals")])
-        .on('error', function(e) {console.log(e);});
+        .on('error', gutil.log);
 });
 
 gulp.task("vendor:hasher", function () {
     return pipe(gulp.src("./node_modules/hasher/dist/js/hasher.js"),
         [gulp.dest("./src/vendor/hasher")])
-        .on('error', function(e) {console.log(e);});
+        .on('error', gutil.log);
 });
 
 gulp.task("vendor:crossroads", function () {
     return pipe(gulp.src("./node_modules/crossroads/dist/crossroads.js"),
         [gulp.dest("./src/vendor/crossroads")])
-        .on('error', function(e) {console.log(e);});
+        .on('error', gutil.log);
 });
 
 gulp.task("vendor:slideout", function () {
     return pipe(gulp.src("./node_modules/slideout/dist/slideout.js"),
         [gulp.dest("./src/vendor/slideout")])
-        .on('error', function(e) {console.log(e);});
+        .on('error', gutil.log);
 });
 
 gulp.task("vendor:popper", function () {
     return pipe(gulp.src("./node_modules/popper.js/dist/umd/popper.js"),
         [gulp.dest("./src/vendor/popper")])
-        .on('error', function(e) {console.log(e);});
+        .on('error', gutil.log);
 });
 
 gulp.task("vendor:bootstrap:sass", function () {
     return pipe(gulp.src("./node_modules/bootstrap/scss/**/*.*"),
         [gulp.dest("./src/vendor/bootstrap/scss")])
-        .on('error', function(e) {console.log(e);});
+        .on('error', gutil.log);
 });
 gulp.task("vendor:bootstrap:js", function () {
      return pipe(gulp.src("./node_modules/bootstrap/dist/js/bootstrap.js"),
         [gulp.dest("./src/vendor/bootstrap/js")])
-        .on('error', function(e) {console.log(e);});
+        .on('error', gutil.log);
 });
 
 gulp.task("vendor:mdbootstrap:sass", function () {
     return pipe(gulp.src(["./node_modules/mdbootstrap/sass/**/*.*", "!./node_modules/mdbootstrap/sass/**/*.txt"]),
         [gulp.dest("./src/vendor/mdbootstrap/scss")])
-        .on('error', function(e) {console.log(e);});
+        .on('error', gutil.log);
 });
 
 gulp.task("vendor:mdbootstrap:js", function () {
     return pipe(gulp.src("./node_modules/mdbootstrap/js/mdb.js"),
         [gulp.dest("./src/vendor/mdbootstrap/js")])
-        .on('error', function(e) {console.log(e);});
+        .on('error', gutil.log);
 });
 
 gulp.task("vendor:mdbootstrap:font", function () {
     return pipe(gulp.src("./node_modules/mdbootstrap/font/**/*.*"),
         [gulp.dest("./src/font")])
-        .on('error', function(e) {console.log(e);});
+        .on('error', gutil.log);
 });
 
 //Build Tasks
@@ -163,7 +164,7 @@ gulp.task("sass", ["move"], function () {
     return pipe(gulp.src(paths.sass.vendor.concat(paths.sass.src)),
         [
             sourcemaps.init(),
-            sass().on("error", sass.logError),
+            sass().on('error', gutil.log),
             autoprefixer(),
             concat("all.css"),
             stripStyleComments({preserve: false}),
@@ -172,20 +173,20 @@ gulp.task("sass", ["move"], function () {
             sourcemaps.write("./"),
             gulp.dest("./src/css")
         ])
-        .on('error', function(e) {console.log(e);});
+        .on('error', gutil.log);
 });
 
 gulp.task("js", ["move"], function () {
     return pipe(gulp.src(paths.js.vendor.concat(paths.js.src)),
         [
-            sourcemaps.init(),
+            // sourcemaps.init(),
             concat("all.js"),
             stripComments(),
-            uglify(),
-            sourcemaps.write("./"),
+            // uglify().on('error', gutil.log),
+            // sourcemaps.write("./"),
             gulp.dest("./src/js")
         ])
-        .on('error', function(e) {console.log(e);});
+        .on('error', gutil.log);
 });
 
 gulp.task("clean", function () {
@@ -193,22 +194,22 @@ gulp.task("clean", function () {
         [
             clean()
         ])
-        .on('error', function(e) {console.log(e);});
+        .on('error', gutil.log);
 });
 gulp.task("clean:dist", function () {
     return pipe(gulp.src(paths.dist, {read: false}),
         [
             clean()
         ])
-        .on('error', function(e) {console.log(e);});
+        .on('error', gutil.log);
 });
 
 gulp.task("build", ["clean:dist", "sass", "js"], function () {
-    return pipe(gulp.src(paths.src + "/**/*.*"),
+    return pipe(gulp.src([paths.src + "/**/*.*", paths.src + "/.htaccess"]),
         [
             gulp.dest(paths.dist)
         ])
-        .on('error', function(e) {console.log(e);});
+        .on('error', gutil.log);
 });
 
 gulp.task("deploy", ["clean:dist", "build"], function () {
@@ -241,7 +242,7 @@ gulp.task("deploy", ["clean:dist", "build"], function () {
             rsync(rsyncConf)
 
         ])
-        .on('error', function(e) {console.log(e);});
+        .on('error', gutil.log);
 });
 
 gulp.task('deploy2', function() {
