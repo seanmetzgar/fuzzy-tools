@@ -85,6 +85,107 @@
 		public $perception = false;
 	}
 
+	class Rumor {
+		public $id = false;
+		public $details = false;
+
+		function __construct($data) {
+			if (is_array($data) && array_key_exists("rumor_id", $data)) {
+				$this->id = (array_key_exists("rumor_id", $data)) ? $data["rumor_id"] : false;
+				$this->details = (array_key_exists("details", $data)) ? $data["details"] : false;
+			}
+		}
+	}
+
+	class Quest {
+		public $id = false;
+		public $title = false;
+		public $details = false;
+		public $giver = false;
+		public $reward = false;
+		public $status = false;
+
+		function __construct($data) {
+			if (is_array($data) && array_key_exists("quest_id", $data)) {
+				$this->id = (array_key_exists("quest_id", $data)) ? $data["quest_id"] : false;
+				$this->title = (array_key_exists("title", $data)) ? $data["title"] : false;
+				$this->details = (array_key_exists("details", $data)) ? $data["details"] : false;
+				$this->giver = (array_key_exists("giver", $data)) ? $data["giver"] : false;
+				$this->reward = (array_key_exists("reward", $data)) ? $data["reward"] : false;
+				$this->status = (array_key_exists("status", $data)) ? $data["status"] : false;
+				$this->status = sanitizeQuestStatus($this->status);
+			}
+		}
+	}
+
+	function getQuests() {
+		$rVal = false;
+		$tempArray = [];
+		global $mysqli;
+
+		if (!$mysqli->connect_errno) {
+			$select_query = "SELECT * FROM `toa_quests`";
+			$select_statement = $mysqli->stmt_init();
+
+			if ($select_statement->prepare($select_query)) {
+				$select_statement->execute();
+
+				$select_result = $select_statement->get_result();
+				while ($tempResult = $select_result->fetch_assoc()) {
+					$has_fields = (is_array($tempResult) && count($tempResult) > 0) ? true : false;
+					if ($has_fields) {
+						$tempObj = new Quest($tempResult);
+
+						if (is_int($tempObj->id) && is_string($tempObj->title) && $tempObj->id > 0 && strlen($tempObj->title) > 0) {
+							$tempArray[] = $tempObj;
+						}
+					}
+				}
+				$select_statement->close();
+			}
+		}
+
+		if (count($tempArray) > 0) {
+			$rVal = $tempArray;
+		}
+
+		return $rVal;
+	}
+
+	function getRumors() {
+		$rVal = false;
+		$tempArray = [];
+		global $mysqli;
+
+		if (!$mysqli->connect_errno) {
+			$select_query = "SELECT * FROM `toa_rumors`";
+			$select_statement = $mysqli->stmt_init();
+
+			if ($select_statement->prepare($select_query)) {
+				$select_statement->execute();
+
+				$select_result = $select_statement->get_result();
+				while ($tempResult = $select_result->fetch_assoc()) {
+					$has_fields = (is_array($tempResult) && count($tempResult) > 0) ? true : false;
+					if ($has_fields) {
+						$tempObj = new Rumor($tempResult);
+
+						if (is_int($tempObj->id) && is_string($tempObj->details) && $tempObj->id > 0 && strlen($tempObj->details) > 0) {
+							$tempArray[] = $tempObj;
+						}
+					}
+				}
+				$select_statement->close();
+			}
+		}
+
+		if (count($tempArray) > 0) {
+			$rVal = $tempArray;
+		}
+		
+		return $rVal;
+	}
+
 	function getCurrentDayID() {
 		$rVal = false;
 		global $mysqli;

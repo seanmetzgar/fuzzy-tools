@@ -39,7 +39,7 @@
 
         <!-- BEGIN: Quests View -->
         <section class="app-view container quests" id="quests">
-            <h1 class="text-center">Quests</h1>
+            <h1 class="text-center">Quests &amp Information</h1>
             <div class="row justify-content-center">
 
             </div>

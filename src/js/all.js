@@ -27629,7 +27629,8 @@ var routes = {
 	"inventory": 	crossroads.addRoute("/inventory/:id:"),
 	"characters": 	crossroads.addRoute("/characters/:id:"),
 	"death-curse": 	crossroads.addRoute("/death-curse/:id:"),
-	"settings": 	crossroads.addRoute("/settings")
+	"settings": 	crossroads.addRoute("/settings"),
+	"default" :     crossroads.addRoute(':rest*:', setView("calendar"), -Infinity);
 };
 
 $.each(routes, function (index, value) {
