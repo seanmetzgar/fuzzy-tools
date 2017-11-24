@@ -34,6 +34,10 @@ a {
     border-radius: 0;
 }
 
+.top-margin {
+    margin-top: 1em;
+}
+
 /** END: Core **/
 
 /** Views **/
@@ -48,12 +52,24 @@ a {
         background-color: lighten($brand-grey, 50%);
         overflow: hidden;
         padding-top: 0; padding-bottom: 0;
-        padding-right: 0;
 
         h3 {
             margin: 0; padding: 0;
             line-height: 4rem;
             float: left;
+        }
+
+        h5 {
+            margin: 0; padding: 0;
+            line-height: 2.5rem;
+            float: left;
+        }
+
+        .status {
+            line-height: 2.5rem;
+            margin: 0; padding: 0;
+            display: block;
+            float: right;
         }
 
         .meta {
@@ -107,6 +123,17 @@ a {
         padding-top: 0; padding-bottom: 0;
         margin-left: -.25rem;
         margin-right: -.25rem;
+        .quest-details {
+            .meta {
+                border-top: 2px solid $brand-brown;
+                border-bottom: 2px solid $brand-brown;
+                margin: 1rem auto;
+                padding: 0.5rem 0;
+
+                p { margin: 0; font-size: .9rem; font-style: italic; }
+            }
+        }
+
         .weather-details {
             h5 {
                 margin: .5rem 0;

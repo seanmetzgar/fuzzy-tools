@@ -39,9 +39,48 @@
 
         <!-- BEGIN: Quests View -->
         <section class="app-view container quests" id="quests">
-            <h1 class="text-center">Quests &amp Information</h1>
-            <div class="row justify-content-center">
+            <h1 class="text-center">Quests &amp; Rumors</h1>
+            
 
+            <h3 class="text-center top-margin">Rumors</h1>
+            <div class="row justify-content-center">
+                <?php $rumors = getRumors(); if ($rumors && is_array($rumors)): ?>
+                <div class="list-group rumors-list col-md-10">
+                    <?php foreach ($rumors as $rumor): ?>
+                    <div class="list-group-item">
+                        <?php echo8($rumor->details); ?>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+                <?php endif; ?>
+            </div>
+
+            <h3 class="text-center top-margin">Quests</h1>
+            <div class="row justify-content-center">
+                <?php $quests = getQuests(); if ($quests && is_array($quests)): ?>
+                <div class="quest-list col-md-10">
+                    <?php foreach ($quests as $quest): ?>
+                    <div class="card data-card quest-card">
+                        <div class="card-header d-flex w-100 justify-content-between">
+                            <h5><?php echo $quest->title; ?></h5>
+                            <small class="status"><?php echo $quest->status; ?></small>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="quest-details">
+                                <div class="meta">
+                                    <p><strong>Giver:</strong> <?php echo $quest->giver; ?></p>
+                                    <p><strong>Reward:</strong> <?php echo $quest->reward; ?></p>
+                                </div>
+
+                                <p><?php echo $quest->details; ?></p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+                <?php endif; ?>
             </div>
         </section>
 

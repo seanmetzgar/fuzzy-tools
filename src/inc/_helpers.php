@@ -118,6 +118,22 @@
 		}
 	}
 
+	function sanitizeQuestStatus($status) {
+		switch ($status) {
+			case 1: 
+			case "1":
+				$rVal = "Active";
+				break;
+			case 2:
+			case "9":
+				$rVal = "Complete";
+				break;
+			default:
+				$rVal = "Unknown";
+		}
+
+		return $rVal;
+	}
 	function getQuests() {
 		$rVal = false;
 		$tempArray = [];
@@ -269,4 +285,8 @@
 		}
 
 		return $rVal;
+	}
+
+	function echo8($item) {
+		echo $item;
 	}
