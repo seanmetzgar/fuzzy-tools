@@ -60,7 +60,7 @@ var paths = {
             "./src/vendor/slideout/slideout.js",
             "./src/vendor/popper/popper.js",
             "./src/vendor/bootstrap/js/bootstrap.js",
-            "./src/vendor/mdbootstrap/js/mdb.js"
+            "./src/vendor/mdbootstrap/js/mdb.min.js"
         ],
         src:[
             "./src/js/src/scripts.js",
@@ -142,19 +142,19 @@ gulp.task("vendor:bootstrap:js", function () {
 });
 
 gulp.task("vendor:mdbootstrap:sass", function () {
-    return pipe(gulp.src(["./node_modules/mdbootstrap/sass/**/*.*", "!./node_modules/mdbootstrap/sass/**/*.txt"]),
+    return pipe(gulp.src(["./lib/mdbootstrap-pro/sass/**/*.*", "!./lib/mdbootstrap-pro/sass/**/*.txt"]),
         [gulp.dest("./src/vendor/mdbootstrap/scss")])
         .on('error', gutil.log);
 });
 
 gulp.task("vendor:mdbootstrap:js", function () {
-    return pipe(gulp.src("./node_modules/mdbootstrap/js/mdb.js"),
+    return pipe(gulp.src("./lib/mdbootstrap-pro/js/mdb.min.js"),
         [gulp.dest("./src/vendor/mdbootstrap/js")])
         .on('error', gutil.log);
 });
 
 gulp.task("vendor:mdbootstrap:font", function () {
-    return pipe(gulp.src("./node_modules/mdbootstrap/font/**/*.*"),
+    return pipe(gulp.src("./lib/mdbootstrap-pro/font/**/*.*"),
         [gulp.dest("./src/font")])
         .on('error', gutil.log);
 });

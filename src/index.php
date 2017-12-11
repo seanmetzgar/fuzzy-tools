@@ -180,53 +180,57 @@
                                         <p class="description">Navigator Survival</p>
                                     </div>
                                     <div class="dice col-md grey lighten-4">
-                                        <h5>Navigate Check (Alt)</h5>
-                                        <p class="roll"><?php echo $day_data->data->navigate_2; ?></p>
-                                        <p class="description">ADV / DA</p>
-                                    </div>
-                                    <div class="dice col-md">
                                         <h5>Displacement</h5>
                                         <p class="displacement d<?php echo $day_data->data->navigate_displacement; ?>"><?php echo $day_data->data->navigate_displacement; ?></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="dice col-md grey lighten-4">
-                                        <h5>Encounter 1</h5>
+                                        <h5>Morning Encounter</h5>
                                         <div class="row">
-                                            <div class="col">
-                                                <p class="roll"><?php echo $day_data->data->encounter_1_check; ?></p>
-                                                <p class="description">Check</p>
-                                            </div>
+                                            <?php if ($day_data->data->encounter_1_bool): ?>
                                             <div class="col">
                                                 <p class="roll"><?php echo $day_data->data->encounter_1_type; ?></p>
-                                                <p class="description">Type</p>
+                                                <p class="description">Encounter Type</p>
                                             </div>
+                                            <?php else: ?>
+                                            <div class="col">
+                                                <p class="roll">N/A</p>
+                                                <p class="description">Encounter Type</p>
+                                            </div>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                     <div class="dice col-md">
-                                        <h5>Encounter 2</h5>
+                                        <h5>Afternoon Encounter</h5>
                                         <div class="row">
-                                            <div class="col">
-                                                <p class="roll"><?php echo $day_data->data->encounter_2_check; ?></p>
-                                                <p class="description">Check</p>
-                                            </div>
+                                            <?php if ($day_data->data->encounter_2_bool): ?>
                                             <div class="col">
                                                 <p class="roll"><?php echo $day_data->data->encounter_2_type; ?></p>
-                                                <p class="description">Type</p>
+                                                <p class="description">Encounter Type</p>
                                             </div>
+                                            <?php else: ?>
+                                            <div class="col">
+                                                <p class="roll">N/A</p>
+                                                <p class="description">Encounter Type</p>
+                                            </div>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                     <div class="dice col-md grey lighten-4">
-                                        <h5>Encounter 3</h5>
+                                        <h5>Night Encounter</h5>
                                         <div class="row">
-                                            <div class="col">
-                                                <p class="roll"><?php echo $day_data->data->encounter_3_check; ?></p>
-                                                <p class="description">Check</p>
-                                            </div>
+                                            <?php if ($day_data->data->encounter_3_bool): ?>
                                             <div class="col">
                                                 <p class="roll"><?php echo $day_data->data->encounter_3_type; ?></p>
-                                                <p class="description">Type</p>
+                                                <p class="description">Encounter Type</p>
                                             </div>
+                                            <?php else: ?>
+                                            <div class="col">
+                                                <p class="roll">N/A</p>
+                                                <p class="description">Encounter Type</p>
+                                            </div>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>       
@@ -239,11 +243,83 @@
             <div class="text-center">
                 <a href="?day=<?php echo ($day_id - 1); ?>" class="btn btn-brown">Previous Day</a>
                 <a href="/" class="btn btn-mdb">Current Day</a>
+                <button class="btn btn-mdb set-current-day" data-current-day="<?php echo $day_id; ?>">SET Current Day</button>
                 <a href="?day=<?php echo ($day_id + 1); ?>" class="btn btn-teal">Next Day</a>
             </div>
             <?php else: ?>
             <p class="text-center"><em>Invalid day id</em></p>
             <?php endif; ?>
+        </section>
+
+        <!-- BEGIN: Navigate View -->
+        <section class="overlay-view container navigate" id="navigate">
+            <h1 class="text-center">Navigate</h1>
+            <form>
+                <input type="hidden" name="day-id" value="<?php echo $day_id; ?>">
+                <div class="row">
+                    <div class="col">
+                        <div class="md-form">
+                            <input class="form-control" type="text" disabled value="<?php echo $day_id; ?>" for="setting-day-id">
+                            <label for="setting-day-id">Current Day</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <select class="mdb-select" id="setting-speed" name="speed">
+                            <option value="0">No Travel</option>
+                            <option value="1">Slow</option>
+                            <option value="2" selected>Normal</option>
+                            <option value="3">Fast</option>
+                        </select>
+                        <label for="setting-speed">Travel Speed</label>
+                    </div>
+                    <div class="col">
+                        <select class="mdb-select" id="setting-navigator" name="navigator">
+                            <?php $navigators = getNavigators(); ?>
+                            <?php if (is_array($navigators) && count($navigators) > 0) {
+                                foreach($navigators as $navigator): ?>
+                            <option value="<?php echo $navigator->id; ?>"><?php echo $navigator->name . " (" . formatNumber($navigator->survival) . ")"; ?></option>
+                            <?php endforeach;
+                            } ?>
+                        </select>
+                        <label for="setting-navigator">Navigator</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <select class="mdb-select" id="setting-speed" name="speed">
+                            <?php $terrains = getTerrains(); ?>
+                            <?php if (is_array($terrains) && count($terrains) > 0) {
+                                foreach($terrains as $terrain): ?>
+                            <option value="<?php echo $terrain->id; ?>"><?php echo $terrain->name; ?></option>
+                            <?php endforeach;
+                            } ?>
+                        </select>
+                        <label for="setting-speed">Morning Terrain</label>
+                    </div>
+                    <div class="col">
+                        <select class="mdb-select" id="setting-speed" name="speed">
+                            <?php if (is_array($terrains) && count($terrains) > 0) {
+                                foreach($terrains as $terrain): ?>
+                            <option value="<?php echo $terrain->id; ?>"><?php echo $terrain->name; ?></option>
+                            <?php endforeach;
+                            } ?>
+                        </select>
+                        <label for="setting-speed">Afternoon Terrain</label>
+                    </div>
+                    <div class="col">
+                        <select class="mdb-select" id="setting-speed" name="speed">
+                            <?php if (is_array($terrains) && count($terrains) > 0) {
+                                foreach($terrains as $terrain): ?>
+                            <option value="<?php echo $terrain->id; ?>"><?php echo $terrain->name; ?></option>
+                            <?php endforeach;
+                            } ?>
+                        </select>
+                        <label for="setting-speed">Evening Terrain</label>
+                    </div>
+
+                </div>
+            </form>
         </section>
 
     </div>

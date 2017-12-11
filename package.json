@@ -35,7 +35,6 @@
     "gulp-util": "^3.0.8",
     "hasher": "^1.2.0",
     "jquery": "^3.2.1",
-    "mdbootstrap": "^4.4.3",
     "minimist": "^1.2.0",
     "popper.js": "1.12.3",
     "rsyncwrapper": "^2.0.1",

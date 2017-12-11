@@ -36,3 +36,20 @@ document.querySelector('button.navbar-toggler').addEventListener('click', functi
     slideout.toggle();
 });
 
+
+$(document).ready(function () {
+	$(".set-current-day").on("click", function() {
+    	var day_id = $(this).data("current-day");
+   		var action = "set_current_day";
+
+    	$.ajax({
+ 			method: "POST",
+			url: "ajax.php",
+			data: { "action": action, "day_id": day_id }
+		}).done(function( response ) {
+		    log("Current Day Update: " + response.status);
+		});
+    });
+
+    $('.mdb-select').material_select();
+});

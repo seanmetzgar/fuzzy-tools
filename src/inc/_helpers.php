@@ -23,10 +23,13 @@
 		public $storm_pm = false;
 		public $encounter_1_check = false;
 		public $encounter_1_type = false;
+		public $encounter_1_bool = false;
 		public $encounter_2_check = false;
 		public $encounter_2_type = false;
+		public $encounter_2_bool = false;
 		public $encounter_3_check = false;
 		public $encounter_3_type = false;
+		public $encounter_3_bool = false;
 		public $navigate_1 = false;
 		public $navigate_2 = false;
 		public $navigate_displacement = false;
@@ -46,6 +49,10 @@
 				$this->navigate_1 = (array_key_exists("navigate_1", $day_data)) ? $day_data["navigate_1"] : false;
 				$this->navigate_2 = (array_key_exists("navigate_2", $day_data)) ? $day_data["navigate_2"] : false;
 				$this->navigate_displacement = (array_key_exists("navigate_displacement", $day_data)) ? $day_data["navigate_displacement"] : false;
+
+				$this->encounter_1_bool = ($this->encounter_1_check > 15) ? true : false;
+				$this->encounter_2_bool = ($this->encounter_2_check > 15) ? true : false;
+				$this->encounter_3_bool = ($this->encounter_3_check > 15) ? true : false;
 			}
 		}
 	}
@@ -78,11 +85,35 @@
 		public $travel_direction = false;
 		public $travel_speed = false;
 	}
+
+	class Terrain {
+		public $id = false;
+		public $name = false;
+
+		function __construct($data) {
+			if (is_array($data) && array_key_exists("terrain_id", $data)) {
+				$this->id = (array_key_exists("terrain_id", $data)) ? $data["terrain_id"] : false;
+				$this->name = (array_key_exists("name", $data)) ? $data["name"] : false;
+			}
+		}
+	}
+
 	class Character {
 		public $id = false;
 		public $name = false;
 		public $survival = false;
 		public $perception = false;
+		public $exhaustion = false;
+
+		function __construct($data) {
+			if (is_array($data) && array_key_exists("character_id", $data)) {
+				$this->id = (array_key_exists("character_id", $data)) ? $data["character_id"] : false;
+				$this->name = (array_key_exists("name", $data)) ? $data["name"] : false;
+				$this->survival = (array_key_exists("survival", $data)) ? $data["survival"] : false;
+				$this->perception = (array_key_exists("perception", $data)) ? $data["perception"] : false;
+				$this->exhaustion = (array_key_exists("exhaustion", $data)) ? $data["exhaustion"] : false;
+			}
+		}
 	}
 
 	class Rumor {
@@ -202,6 +233,118 @@
 		return $rVal;
 	}
 
+	function getModifier($score) {
+		$rVal = 0;
+		if (is_int($score)) {
+			$rVal = (10 - $score) / 2;		
+		}
+
+		return $rVal;
+	}
+
+	function getNavigators() {
+		$rVal = false;
+		$tempArray = [];
+		global $mysqli;
+
+		if (!$mysqli->connect_errno) {
+			$select_query = "SELECT * FROM `toa_character_stats` WHERE `character_id` != 0";
+			$select_statement = $mysqli->stmt_init();
+
+			if ($select_statement->prepare($select_query)) {
+				$select_statement->execute();
+
+				$select_result = $select_statement->get_result();
+				while ($tempResult = $select_result->fetch_assoc()) {
+					$has_fields = (is_array($tempResult) && count($tempResult) > 0) ? true : false;
+					if ($has_fields) {
+						$tempObj = new Character($tempResult);
+
+						if (is_int($tempObj->id) && is_string($tempObj->name) && $tempObj->id > 0 && strlen($tempObj->name) > 0) {
+							$tempArray[] = $tempObj;
+						}
+					}
+				}
+				$select_statement->close();
+			}
+		}
+
+		if (count($tempArray) > 0) {
+			$rVal = $tempArray;
+		}
+
+		return $rVal;
+	}
+
+	function getTerrains() {
+		$rVal = false;
+		$tempArray = [];
+		global $mysqli;
+
+		if (!$mysqli->connect_errno) {
+			$select_query = "SELECT * FROM `toa_terrain`";
+			$select_statement = $mysqli->stmt_init();
+
+			if ($select_statement->prepare($select_query)) {
+				$select_statement->execute();
+
+				$select_result = $select_statement->get_result();
+				while ($tempResult = $select_result->fetch_assoc()) {
+					$has_fields = (is_array($tempResult) && count($tempResult) > 0) ? true : false;
+					if ($has_fields) {
+						$tempObj = new Terrain($tempResult);
+
+						if (is_int($tempObj->id) && is_string($tempObj->name) && $tempObj->id > 0 && strlen($tempObj->name) > 0) {
+							$tempArray[] = $tempObj;
+						}
+					}
+				}
+				$select_statement->close();
+			}
+		}
+
+		if (count($tempArray) > 0) {
+			$rVal = $tempArray;
+		}
+
+		return $rVal;
+	}
+
+	function setMetaValue($key, $value) {
+		$rVal = false;
+		global $mysqli;
+
+		if (!$mysqli->connect_errno) {
+			$update_query = "UPDATE `toa_campaign_meta` SET `meta_value`=? WHERE `meta_name`=?";
+			$update_statement = $mysqli->stmt_init();
+
+			if ($update_statement->prepare($update_query)) {
+				$update_statement->bind_param('ss', $value, $key);
+				$update_statement->execute();
+
+				$update_statement->close();
+				$rVal = true;
+			}
+		}
+
+		return $rVal;
+	}
+
+	function setNavigationDetails($day_id, $navigator_id, $speed, $terrain_1, $terrain_2, $terrain_3) {
+		$rVal = true;
+		if (!setMetaValue("current_day", $day_id)) {
+			$rVal = false;
+		}
+		if ($rVal) $rVal = setMetaValue("current_day_navigator", $navigator_id);
+		if ($rVal) $rVal = setMetaValue("current_day_speed", $speed);
+		if ($rVal) $rVal = setMetaValue("current_day_terrain_1", $terrain_1);
+		if ($rVal) $rVal = setMetaValue("current_day_terrain_2", $terrain_2);
+		if ($rVal) $rVal = setMetaValue("current_day_terrain_3", $terrain_3);
+
+		return $rVal;
+	}
+
+
 	function getCurrentDayID() {
 		$rVal = false;
 		global $mysqli;
@@ -226,6 +369,10 @@
 		}
 
 		return $rVal;
+	}
+
+	function formatNumber($num) {
+	   return ($num>0)?'+'.$num:$num;
 	}
 
 	function getCalendarDay($day_id = null) {
